@@ -23,14 +23,14 @@ globs:
   
     Syntax and Formatting
     - Use the "function" keyword for pure functions to benefit from hoisting and clarity.
-    - Always use the Vue Composition API script setup style.
+
   
     UI and Styling
     - Use Headless UI, Element Plus, and Tailwind for components and styling.
     - Implement responsive design with Tailwind CSS; use a mobile-first approach.
   
     Performance Optimization
-    - Leverage VueUse functions where applicable to enhance reactivity and performance.
+    - Leverage React functions where applicable to enhance reactivity and performance.
     - Wrap asynchronous components in Suspense with a fallback UI.
     - Use dynamic loading for non-critical components.
     - Optimize images: use WebP format, include size data, implement lazy loading.

@@ -1,6 +1,14 @@
 import React from 'react';
 import { Heart, Star, Users, Calendar, ArrowRight, Phone, MapPin, Mail, Clock, ChevronRight, Timer, Sparkles, Tag, CheckCircle2, Trophy, Zap, ShieldCheck } from 'lucide-react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { RootLayout } from './components/layout/RootLayout';
+import Home from './pages/Home';
+import Services from './pages/Services';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+import Booking from './pages/Booking';
+import { HelmetProvider } from 'react-helmet-async';
 
 // Benefits data
 const benefits = [
@@ -127,14 +135,21 @@ const capeTownServices = [
 ];
 
 function App() {
-  const [selectedLocation, setSelectedLocation] = React.useState<'johannesburg' | 'capetown' | null>(null);
-
   return (
-    <RootLayout>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold">Welcome to Your Website</h1>
-      </div>
-    </RootLayout>
+    <HelmetProvider>
+      <Router>
+        <RootLayout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/booking" element={<Booking />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </RootLayout>
+      </Router>
+    </HelmetProvider>
   );
 }
 

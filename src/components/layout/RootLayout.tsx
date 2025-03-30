@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Heart, Phone, Mail, Instagram, Facebook } from 'lucide-react';
 
 interface RootLayoutProps {
@@ -6,25 +7,40 @@ interface RootLayoutProps {
 }
 
 export function RootLayout({ children }: RootLayoutProps) {
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    return location.pathname === path ? 'text-pink-500' : 'text-gray-600 hover:text-pink-500';
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-sm">
+      <header className="sticky top-0 z-50 w-full border-b border-pink-100 bg-pink-50/80 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <a href="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <Heart className="w-6 h-6 text-pink-500" />
               <span className="text-xl font-bold">
                 <span className="text-pink-500">Skin</span> & <span>Body</span>
               </span>
-            </a>
+            </Link>
             
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#services" className="text-gray-600 hover:text-pink-500 transition">Services</a>
-              <a href="#about" className="text-gray-600 hover:text-pink-500 transition">About</a>
-              <a href="#contact" className="text-gray-600 hover:text-pink-500 transition">Contact</a>
-              <button className="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition">
+              <Link to="/services" className={`transition ${isActive('/services')}`}>
+                Services
+              </Link>
+              <Link to="/about" className={`transition ${isActive('/about')}`}>
+                About
+              </Link>
+              <Link to="/contact" className={`transition ${isActive('/contact')}`}>
+                Contact
+              </Link>
+              <Link 
+                to="/booking" 
+                className="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition"
+              >
                 Book Now
-              </button>
+              </Link>
             </nav>
           </div>
         </div>
@@ -34,7 +50,7 @@ export function RootLayout({ children }: RootLayoutProps) {
         {children}
       </main>
       
-      <footer className="border-t bg-gray-50">
+      <footer className="bg-gradient-to-b from-pink-50 to-pink-100">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
