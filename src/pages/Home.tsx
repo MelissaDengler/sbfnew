@@ -143,9 +143,9 @@ export default function Home() {
               <Link to="/booking#booking-section" className="bg-pink-500 text-white px-8 py-3 rounded-full text-lg hover:bg-pink-600 transition">
                 Book Now
               </Link>
-              <button className="bg-white text-pink-500 px-8 py-3 rounded-full text-lg hover:bg-gray-100 transition">
+              <Link to="/services" className="bg-white text-pink-500 px-8 py-3 rounded-full text-lg hover:bg-gray-100 transition">
                 View Services
-              </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -336,56 +336,76 @@ export default function Home() {
         </section>
 
         {/* Featured Services Section - Enhanced */}
-        <section className="py-20 bg-pink-50">
+        <section id="services-section" className="py-20 bg-pink-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-16">Our Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Body Sculpting",
-                  description: "Advanced techniques for targeted fat reduction",
-                  image: "https://images.unsplash.com/photo-1532446872803-654cb879aa37?auto=format&fit=crop&q=80",
-                  features: ["Non-Invasive", "Quick Recovery", "Lasting Results"]
-                },
-                {
-                  title: "Skin Tightening",
-                  description: "Revolutionary treatments to improve skin elasticity and texture",
-                  image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80",
-                  features: ["Non-Invasive", "All Skin Types", "Long-lasting Results"]
-                },
-                {
-                  title: "Cellulite Reduction",
-                  description: "Effective solutions for smoother, firmer skin",
-                  image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80",
-                  features: ["Targeted Treatment", "Proven Technology", "Custom Plans"]
-                }
-              ].map((service, index) => (
-                <div key={index} className="bg-pink-50/95 rounded-2xl shadow-lg overflow-hidden transition hover:shadow-xl border border-pink-100">
-                  <div className="relative">
-                    <img 
-                      src={service.image} 
-                      alt={service.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-pink-500/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                    <p className="text-gray-600 mb-4">{service.description}</p>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center text-gray-600">
-                          <CheckCircle className="w-5 h-5 text-pink-500 mr-2" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <button className="mt-6 w-full bg-pink-500 text-white py-2 rounded-full hover:bg-pink-600 transition">
-                      Learn More
-                    </button>
-                  </div>
-                </div>
-              ))}
+            <h2 className="text-4xl font-bold text-center mb-16">Our Services & Packages</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              {/* Individual Services */}
+              <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">Endermologie</h3>
+                <p className="text-gray-600 mb-2">R450 per session <span className="text-sm">(30 min)</span></p>
+                <p className="text-gray-500 flex-1">Advanced vacuum suction slimming and shaping for targeted fat reduction and cellulite smoothing.</p>
+              </div>
+              <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">Faradic</h3>
+                <p className="text-gray-600 mb-2">R250 per session <span className="text-sm">(30 min)</span></p>
+                <p className="text-gray-500 flex-1">Muscle stimulation for toning, firming, and body sculpting. Great for stubborn areas.</p>
+              </div>
+              <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">Detox Sauna</h3>
+                <p className="text-gray-600 mb-2">R200 per session <span className="text-sm">(30 min)</span></p>
+                <p className="text-gray-500 flex-1">Infrared sauna dome therapy for deep detox, calorie burn, pain relief, and improved skin tone. Unlike traditional saunas, our infrared domes penetrate deeper into your tissues, promoting cellular repair and reducing inflammation. Clients report better sleep, stress relief, improved mood, and noticeable cm loss over time. It's also a powerful immunity booster, helping your body flush out toxins naturally through sweating. Safe, effective, and deeply relaxing, each session feels like a mini wellness retreat. Book yours today and feel the difference after just one use.</p>
+              </div>
+            </div>
+            {/* Packages */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">150 Fat Dissolving Injections</h3>
+                <p className="text-gray-600 mb-1">45 min</p>
+                <p className="text-gray-500 mb-2">Full body (size 38+). Includes x3 30 min Sauna sessions.</p>
+                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 6,600</div>
+              </div>
+              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">100 Fat Dissolving Injections</h3>
+                <p className="text-gray-600 mb-1">45 min</p>
+                <p className="text-gray-500 mb-2">Full body (size 36+). Includes x3 30 min Sauna sessions.</p>
+                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 5,100</div>
+              </div>
+              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">40 Fat Dissolving Injections</h3>
+                <p className="text-gray-600 mb-1">45 min</p>
+                <p className="text-gray-500 mb-2">x2 large areas (stomach & thighs, front & back). Includes x3 Sauna sessions.</p>
+                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 2,890</div>
+              </div>
+              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">20 Fat Dissolving Injections</h3>
+                <p className="text-gray-600 mb-1">35 min</p>
+                <p className="text-gray-500 mb-2">For size 36+ (stomach, thighs, back, arms, multiple areas). Includes x3 30 min Sauna sessions.</p>
+                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 1,590</div>
+              </div>
+              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">10 Slimming Injections</h3>
+                <p className="text-gray-600 mb-1">35 min</p>
+                <p className="text-gray-500 mb-2">For larger areas (stomach, thighs, bum, back). Includes x2 30 min Sauna sessions.</p>
+                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 850</div>
+              </div>
+              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">6 Fat Dissolving Injections</h3>
+                <p className="text-gray-600 mb-1">35 min</p>
+                <p className="text-gray-500 mb-2">For small areas (arms, love handles, chin, knees, or fat deposits).</p>
+              </div>
+              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">Consult</h3>
+                <p className="text-gray-600 mb-1">30 min</p>
+                <p className="text-gray-500 mb-2">Book your free consultation and receive a complimentary 30-minute infrared sauna session to kickstart your detox. During this time, we assess your body type, target areas, and wellness goals to recommend a personalised plan, including how many natural fat-dissolving injections may be ideal for best results. It's a no-pressure, informative session designed to give you real insight into what will work for your body. Whether you're focused on slimming, reducing bloating, or improving skin tone, this is the perfect first step to a healthier, more confident you.</p>
+                <div className="text-2xl font-bold text-pink-500 mb-2">Free</div>
+              </div>
+              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">Detox Sauna</h3>
+                <p className="text-gray-600 mb-1">30 min</p>
+                <p className="text-gray-500 mb-2">Experience the power of infrared sauna dome therapy—a 30 minute session can help you burn up to 600 calories while deeply detoxifying your body, boosting circulation, easing joint and muscle pain, and enhancing skin tone. Unlike traditional saunas, our infrared domes penetrate deeper into your tissues, promoting cellular repair and reducing inflammation. Clients report better sleep, stress relief, improved mood, and noticeable cm loss over time. It's also a powerful immunity booster, helping your body flush out toxins naturally through sweating. Safe, effective, and deeply relaxing, each session feels like a mini wellness retreat. Book yours today and feel the difference after just one use.</p>
+                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 200</div>
+              </div>
             </div>
           </div>
         </section>

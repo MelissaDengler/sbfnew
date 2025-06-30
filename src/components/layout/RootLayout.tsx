@@ -80,10 +80,16 @@ export function RootLayout({ children }: RootLayoutProps) {
       <div className="bg-pink-500 text-white py-2 px-4">
         <div className="container mx-auto flex justify-between items-center text-sm">
           <div className="flex items-center space-x-4">
-            <a href="tel:+27215525580" className="flex items-center hover:text-pink-100">
+            <span className="flex items-center">
               <Phone className="w-4 h-4 mr-1" />
-              +27 21 552 5580
-            </a>
+              <span className="font-semibold mr-1">CT:</span>
+              <a href="tel:+27813300683" className="hover:text-pink-100">081 330 0683</a>
+            </span>
+            <span className="flex items-center">
+              <Phone className="w-4 h-4 mr-1" />
+              <span className="font-semibold mr-1">JHB:</span>
+              <a href="tel:+27685995717" className="hover:text-pink-100">068 599 5717</a>
+            </span>
             <a href="mailto:skinandbodyfitnessct@gmail.co.za" className="flex items-center hover:text-pink-100">
               <Mail className="w-4 h-4 mr-1" />
               skinandbodyfitnessct@gmail.co.za
@@ -298,10 +304,16 @@ export function RootLayout({ children }: RootLayoutProps) {
             <div>
               <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
               <div className="space-y-3">
-                <a href="tel:+27215525580" className="flex items-center text-gray-600 hover:text-pink-500">
+                <div className="flex items-center text-gray-600 hover:text-pink-500">
                   <Phone className="w-4 h-4 mr-2" />
-                  +27 21 552 5580
-                </a>
+                  <span className="font-semibold mr-1">Cape Town:</span>
+                  <a href="tel:+27813300683" className="hover:text-pink-500">081 330 0683</a>
+                </div>
+                <div className="flex items-center text-gray-600 hover:text-pink-500">
+                  <Phone className="w-4 h-4 mr-2" />
+                  <span className="font-semibold mr-1">Johannesburg:</span>
+                  <a href="tel:+27685995717" className="hover:text-pink-500">068 599 5717</a>
+                </div>
                 <a href="mailto:skinandbodyfitnessct@gmail.co.za" className="flex items-center text-gray-600 hover:text-pink-500">
                   <Mail className="w-4 h-4 mr-2" />
                   skinandbodyfitnessct@gmail.co.za
