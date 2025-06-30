@@ -27,7 +27,7 @@ export default function Booking() {
   return (
     <div className="bg-pink-50 min-h-screen">
       <section id="booking-section" className="py-16 bg-gradient-to-b from-pink-50 to-pink-100">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2 sm:px-4">
           <h1 className="text-4xl font-bold text-center mb-4">Book Your Appointment</h1>
           <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
             Choose your preferred location and time for your treatment. Our team will confirm your appointment within 24 hours.
@@ -45,7 +45,7 @@ export default function Booking() {
                     whileHover={{ scale: 1.02 }}
                     onClick={() => setSelectedLocation(location.id)}
                   >
-                    <div className="relative h-48">
+                    <div className="relative h-32 sm:h-48">
                       <img
                         src={location.image}
                         alt={location.name}

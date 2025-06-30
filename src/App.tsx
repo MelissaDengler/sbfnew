@@ -8,6 +8,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import Booking from './pages/Booking';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 import { HelmetProvider } from 'react-helmet-async';
 
 // Benefits data
@@ -145,6 +147,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/booking" element={<Booking />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </RootLayout>

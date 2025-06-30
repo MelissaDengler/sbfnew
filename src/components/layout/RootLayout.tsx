@@ -336,8 +336,8 @@ export function RootLayout({ children }: RootLayoutProps) {
             <div>
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <div className="space-y-2">
-                <a href="#" className="block text-gray-600 hover:text-pink-500">Terms & Conditions</a>
-                <a href="#" className="block text-gray-600 hover:text-pink-500">Privacy Policy</a>
+                <a href="/terms" className="block text-gray-600 hover:text-pink-500">Terms & Conditions</a>
+                <a href="/privacy" className="block text-gray-600 hover:text-pink-500">Privacy Policy</a>
                 <a href="#" className="block text-gray-600 hover:text-pink-500">FAQ</a>
               </div>
             </div>

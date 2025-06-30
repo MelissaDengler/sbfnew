@@ -75,5 +75,27 @@ export const pageMetadata: Record<string, MetaData> = {
       "treatment consultation",
       "online booking"
     ]
+  },
+  terms: {
+    title: "Terms & Conditions | Skin & Body Fitness",
+    description: "Read the terms and conditions for all services provided by Skin and Body Fitness, including EMS, Endermologie, Infrared Sauna Therapy, and more.",
+    keywords: [
+      "terms and conditions",
+      "skin and body fitness",
+      "wellness clinic policies",
+      "slimming clinic terms",
+      "body sculpting legal"
+    ]
+  },
+  privacy: {
+    title: "Privacy Policy | Skin & Body Fitness",
+    description: "Read our privacy policy to learn how Skin and Body Fitness collects, uses, and protects your personal information.",
+    keywords: [
+      "privacy policy",
+      "data protection",
+      "client confidentiality",
+      "skin and body fitness privacy",
+      "wellness clinic privacy"
+    ]
   }
 }; 

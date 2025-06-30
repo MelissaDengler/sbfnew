@@ -45,10 +45,7 @@ const monthlySpecials = [
 const specialsWithExtras = monthlySpecials.map(special => ({
   ...special,
   endDate: addMonths(new Date(), 1).getTime(), // 1 month from now
-  beforeAfterImages: {
-    before: "https://images.unsplash.com/photo-1595243643203-06ba168495eb?auto=format&fit=crop&q=80",
-    after: "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?auto=format&fit=crop&q=80"
-  },
+  image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80", // Natural, leafy
   reviews: [
     {
       name: "Sarah M.",
@@ -119,10 +116,14 @@ export default function Home() {
 
   return (
     <>
-      <SEO page="home" />
-      <div className="relative bg-pink-50/95">
+      <SEO 
+        page="home" 
+        customTitle="Home | Skin & Body Fitness - Advanced Slimming & Shaping" 
+        customDescription="Transform your body and life with advanced slimming, shaping, and wellness treatments at Skin & Body Fitness. Explore our monthly specials and book your session today!" 
+      />
+      <main className="relative bg-pink-50/95">
         {/* Hero Section - Enhanced with gradient */}
-        <section className="relative h-[60vh]">
+        <section className="relative h-[50vh] sm:h-[60vh]">
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
@@ -132,11 +133,11 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500/80 to-black/50"></div>
           </div>
           
-          <div className="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-4">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <div className="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-2 sm:px-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               Transform Your Body,<br />Transform Your Life
             </h1>
-            <p className="text-xl mb-8 max-w-2xl">
+            <p className="text-base sm:text-xl mb-8 max-w-2xl">
               Experience the ultimate in body transformation with our advanced treatments and expert care
             </p>
             <div className="flex gap-4">
@@ -152,7 +153,7 @@ export default function Home() {
 
         {/* Monthly Specials Section */}
         <section className="py-20 bg-gradient-to-b from-pink-50 to-pink-100">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-2 sm:px-4">
             <div className="text-center mb-16">
               <span className="bg-pink-100 text-pink-500 px-4 py-1 rounded-full font-semibold text-sm">
                 Limited Time Offers
@@ -163,137 +164,122 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               {specialsWithExtras.map((special, index) => (
                 <div 
                   key={index}
-                  className="bg-pink-50 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 border border-pink-100"
+                  className="bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-3xl border-2 border-pink-100 shadow-2xl shadow-pink-300/40 hover:shadow-[0_8px_32px_0_rgba(236,72,153,0.25),0_1.5px_8px_0_rgba(236,72,153,0.10)] hover:border-pink-400 hover:ring-2 hover:ring-pink-200/60 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 p-1 overflow-hidden"
                 >
-                  {/* Before/After Images */}
-                  <div className="relative h-48">
-                    <div className="absolute inset-0 flex">
-                      <div className="w-1/2 relative overflow-hidden">
-                        <img 
-                          src={special.beforeAfterImages.before} 
-                          alt="Before"
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        <span className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
-                          Before
-                        </span>
-                      </div>
-                      <div className="w-1/2 relative overflow-hidden">
-                        <img 
-                          src={special.beforeAfterImages.after} 
-                          alt="After"
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        <span className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
-                          After
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 bg-gradient-to-b from-pink-50 to-pink-100">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-semibold mb-2">{special.title}</h3>
-                        <p className="text-gray-500 flex items-center text-sm">
-                          <Timer className="w-4 h-4 mr-1" />
-                          Valid until {special.validUntil}
-                        </p>
-                      </div>
+                  <div className="bg-white rounded-2xl p-6 h-full flex flex-col">
+                    {/* Before/After Images */}
+                    <div className="relative h-48">
+                      <img 
+                        src={special.image} 
+                        alt={`Before and after results for ${special.title}`}
+                        className="absolute inset-0 w-full h-full object-cover rounded-t-2xl"
+                      />
                     </div>
 
-                    {/* Countdown Timer - Enhanced */}
-                    <div className="mb-4 text-center">
-                      {(() => {
-                        const { days, hours, minutes, seconds } = useCountdown(special.endDate);
-                        return (
-                          <div className="grid grid-cols-4 gap-2">
-                            {[
-                              { value: days, label: 'Days' },
-                              { value: hours, label: 'Hours' },
-                              { value: minutes, label: 'Mins' },
-                              { value: seconds, label: 'Secs' }
-                            ].map((time, idx) => (
-                              <div key={idx} className="bg-pink-100 p-2 rounded-lg shadow-sm">
-                                <div className="text-xl font-bold text-pink-500">{time.value}</div>
-                                <div className="text-xs text-pink-400">{time.label}</div>
-                              </div>
-                            ))}
-                          </div>
-                        );
-                      })()}
-                    </div>
-
-                    <div className="mb-4">
-                      <span className="text-gray-400 line-through text-lg">{special.originalPrice}</span>
-                      <span className="text-3xl font-bold text-pink-500 ml-2">{special.specialPrice}</span>
-                    </div>
-
-                    <p className="text-gray-600 mb-4">{special.description}</p>
-
-                    <div className="space-y-2 mb-6">
-                      {special.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-gray-600">
-                          <CheckCircle className="w-5 h-5 text-pink-500 mr-2" />
-                          <span>{feature}</span>
+                    <div className="p-6 bg-gradient-to-b from-pink-50 to-pink-100">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="text-xl font-semibold mb-2">{special.title}</h3>
+                          <p className="text-gray-500 flex items-center text-sm">
+                            <Timer className="w-4 h-4 mr-1" />
+                            Valid until {special.validUntil}
+                          </p>
                         </div>
-                      ))}
-                    </div>
+                      </div>
 
-                    <div className="flex items-center justify-between text-sm mb-6">
-                      <span className="flex items-center text-gray-500">
-                        <Tag className="w-4 h-4 mr-1" />
-                        {special.location}
-                      </span>
-                      <span className="flex items-center text-pink-500">
-                        <Sparkles className="w-4 h-4 mr-1" />
-                        Limited Spots
-                      </span>
-                    </div>
+                      {/* Countdown Timer - Enhanced */}
+                      <div className="mb-4 text-center">
+                        {(() => {
+                          const { days, hours, minutes, seconds } = useCountdown(special.endDate);
+                          return (
+                            <div className="grid grid-cols-4 gap-2">
+                              {[
+                                { value: days, label: 'Days' },
+                                { value: hours, label: 'Hours' },
+                                { value: minutes, label: 'Mins' },
+                                { value: seconds, label: 'Secs' }
+                              ].map((time, idx) => (
+                                <div key={idx} className="bg-pink-100 p-2 rounded-lg shadow-sm">
+                                  <div className="text-xl font-bold text-pink-500">{time.value}</div>
+                                  <div className="text-xs text-pink-400">{time.label}</div>
+                                </div>
+                              ))}
+                            </div>
+                          );
+                        })()}
+                      </div>
 
-                    {/* Reviews Preview */}
-                    <div className="mb-6">
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold">Client Reviews</h4>
-                        <button 
-                          onClick={() => setSelectedSpecial(index)}
-                          className="text-sm text-pink-500 hover:text-pink-600"
+                      <div className="mb-4">
+                        <span className="text-gray-400 line-through text-lg">{special.originalPrice}</span>
+                        <span className="text-3xl font-bold text-pink-500 ml-2">{special.specialPrice}</span>
+                      </div>
+
+                      <p className="text-gray-600 mb-4">{special.description}</p>
+
+                      <div className="space-y-2 mb-6">
+                        {special.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-center text-gray-600">
+                            <CheckCircle className="w-5 h-5 text-pink-500 mr-2" />
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex items-center justify-between text-sm mb-6">
+                        <span className="flex items-center text-gray-500">
+                          <Tag className="w-4 h-4 mr-1" />
+                          {special.location}
+                        </span>
+                        <span className="flex items-center text-pink-500">
+                          <Sparkles className="w-4 h-4 mr-1" />
+                          Limited Spots
+                        </span>
+                      </div>
+
+                      {/* Reviews Preview */}
+                      <div className="mb-6">
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold">Client Reviews</h4>
+                          <button 
+                            onClick={() => setSelectedSpecial(index)}
+                            className="text-sm text-pink-500 hover:text-pink-600"
+                          >
+                            View All
+                          </button>
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {special.reviews[0].comment.substring(0, 70)}...
+                        </div>
+                      </div>
+
+                      {/* Action Buttons - Enhanced */}
+                      <div className="flex gap-2 mb-4">
+                        <button
+                          onClick={() => handleShare(special)}
+                          className="flex-1 flex items-center justify-center px-4 py-2 bg-pink-50 text-pink-500 rounded-full hover:bg-pink-100 transition"
                         >
-                          View All
+                          <Share2 className="w-4 h-4 mr-2" />
+                          Share
+                        </button>
+                        <button
+                          onClick={() => setShowCompare(true)}
+                          className="flex-1 flex items-center justify-center px-4 py-2 bg-pink-50 text-pink-500 rounded-full hover:bg-pink-100 transition"
+                        >
+                          Compare
                         </button>
                       </div>
-                      <div className="text-sm text-gray-600">
-                        {special.reviews[0].comment.substring(0, 70)}...
-                      </div>
-                    </div>
 
-                    {/* Action Buttons - Enhanced */}
-                    <div className="flex gap-2 mb-4">
-                      <button
-                        onClick={() => handleShare(special)}
-                        className="flex-1 flex items-center justify-center px-4 py-2 bg-pink-50 text-pink-500 rounded-full hover:bg-pink-100 transition"
+                      <Link
+                        to="/booking"
+                        className="block w-full bg-pink-500 text-white text-center py-3 rounded-full hover:bg-pink-600 transition"
                       >
-                        <Share2 className="w-4 h-4 mr-2" />
-                        Share
-                      </button>
-                      <button
-                        onClick={() => setShowCompare(true)}
-                        className="flex-1 flex items-center justify-center px-4 py-2 bg-pink-50 text-pink-500 rounded-full hover:bg-pink-100 transition"
-                      >
-                        Compare
-                      </button>
+                        Book Now
+                      </Link>
                     </div>
-
-                    <Link
-                      to="/booking"
-                      className="block w-full bg-pink-500 text-white text-center py-3 rounded-full hover:bg-pink-600 transition"
-                    >
-                      Book Now
-                    </Link>
                   </div>
                 </div>
               ))}
@@ -315,96 +301,21 @@ export default function Home() {
         <section className="py-16 bg-pink-50">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="text-center">
+              <div className="text-center bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 border-2 border-pink-100 py-10 px-2 hover:shadow-2xl hover:border-pink-400 transition-all duration-300">
                 <div className="text-4xl font-bold text-pink-500 mb-2">5000+</div>
                 <div className="text-gray-600">Happy Clients</div>
               </div>
-              <div className="text-center">
+              <div className="text-center bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 border-2 border-pink-100 py-10 px-2 hover:shadow-2xl hover:border-pink-400 transition-all duration-300">
                 <div className="text-4xl font-bold text-pink-500 mb-2">15+</div>
                 <div className="text-gray-600">Years Experience</div>
               </div>
-              <div className="text-center">
+              <div className="text-center bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 border-2 border-pink-100 py-10 px-2 hover:shadow-2xl hover:border-pink-400 transition-all duration-300">
                 <div className="text-4xl font-bold text-pink-500 mb-2">98%</div>
                 <div className="text-gray-600">Success Rate</div>
               </div>
-              <div className="text-center">
+              <div className="text-center bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 border-2 border-pink-100 py-10 px-2 hover:shadow-2xl hover:border-pink-400 transition-all duration-300">
                 <div className="text-4xl font-bold text-pink-500 mb-2">20+</div>
                 <div className="text-gray-600">Expert Staff</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Services Section - Enhanced */}
-        <section id="services-section" className="py-20 bg-pink-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-16">Our Services & Packages</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              {/* Individual Services */}
-              <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">Endermologie</h3>
-                <p className="text-gray-600 mb-2">R450 per session <span className="text-sm">(30 min)</span></p>
-                <p className="text-gray-500 flex-1">Advanced vacuum suction slimming and shaping for targeted fat reduction and cellulite smoothing.</p>
-              </div>
-              <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">Faradic</h3>
-                <p className="text-gray-600 mb-2">R250 per session <span className="text-sm">(30 min)</span></p>
-                <p className="text-gray-500 flex-1">Muscle stimulation for toning, firming, and body sculpting. Great for stubborn areas.</p>
-              </div>
-              <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">Detox Sauna</h3>
-                <p className="text-gray-600 mb-2">R200 per session <span className="text-sm">(30 min)</span></p>
-                <p className="text-gray-500 flex-1">Infrared sauna dome therapy for deep detox, calorie burn, pain relief, and improved skin tone. Unlike traditional saunas, our infrared domes penetrate deeper into your tissues, promoting cellular repair and reducing inflammation. Clients report better sleep, stress relief, improved mood, and noticeable cm loss over time. It's also a powerful immunity booster, helping your body flush out toxins naturally through sweating. Safe, effective, and deeply relaxing, each session feels like a mini wellness retreat. Book yours today and feel the difference after just one use.</p>
-              </div>
-            </div>
-            {/* Packages */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">150 Fat Dissolving Injections</h3>
-                <p className="text-gray-600 mb-1">45 min</p>
-                <p className="text-gray-500 mb-2">Full body (size 38+). Includes x3 30 min Sauna sessions.</p>
-                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 6,600</div>
-              </div>
-              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">100 Fat Dissolving Injections</h3>
-                <p className="text-gray-600 mb-1">45 min</p>
-                <p className="text-gray-500 mb-2">Full body (size 36+). Includes x3 30 min Sauna sessions.</p>
-                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 5,100</div>
-              </div>
-              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">40 Fat Dissolving Injections</h3>
-                <p className="text-gray-600 mb-1">45 min</p>
-                <p className="text-gray-500 mb-2">x2 large areas (stomach & thighs, front & back). Includes x3 Sauna sessions.</p>
-                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 2,890</div>
-              </div>
-              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">20 Fat Dissolving Injections</h3>
-                <p className="text-gray-600 mb-1">35 min</p>
-                <p className="text-gray-500 mb-2">For size 36+ (stomach, thighs, back, arms, multiple areas). Includes x3 30 min Sauna sessions.</p>
-                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 1,590</div>
-              </div>
-              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">10 Slimming Injections</h3>
-                <p className="text-gray-600 mb-1">35 min</p>
-                <p className="text-gray-500 mb-2">For larger areas (stomach, thighs, bum, back). Includes x2 30 min Sauna sessions.</p>
-                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 850</div>
-              </div>
-              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">6 Fat Dissolving Injections</h3>
-                <p className="text-gray-600 mb-1">35 min</p>
-                <p className="text-gray-500 mb-2">For small areas (arms, love handles, chin, knees, or fat deposits).</p>
-              </div>
-              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">Consult</h3>
-                <p className="text-gray-600 mb-1">30 min</p>
-                <p className="text-gray-500 mb-2">Book your free consultation and receive a complimentary 30-minute infrared sauna session to kickstart your detox. During this time, we assess your body type, target areas, and wellness goals to recommend a personalised plan, including how many natural fat-dissolving injections may be ideal for best results. It's a no-pressure, informative session designed to give you real insight into what will work for your body. Whether you're focused on slimming, reducing bloating, or improving skin tone, this is the perfect first step to a healthier, more confident you.</p>
-                <div className="text-2xl font-bold text-pink-500 mb-2">Free</div>
-              </div>
-              <div className="bg-pink-50 rounded-2xl shadow-lg p-6 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">Detox Sauna</h3>
-                <p className="text-gray-600 mb-1">30 min</p>
-                <p className="text-gray-500 mb-2">Experience the power of infrared sauna dome therapy—a 30 minute session can help you burn up to 600 calories while deeply detoxifying your body, boosting circulation, easing joint and muscle pain, and enhancing skin tone. Unlike traditional saunas, our infrared domes penetrate deeper into your tissues, promoting cellular repair and reducing inflammation. Clients report better sleep, stress relief, improved mood, and noticeable cm loss over time. It's also a powerful immunity booster, helping your body flush out toxins naturally through sweating. Safe, effective, and deeply relaxing, each session feels like a mini wellness retreat. Book yours today and feel the difference after just one use.</p>
-                <div className="text-2xl font-bold text-pink-500 mb-2">ZAR 200</div>
               </div>
             </div>
           </div>
@@ -437,7 +348,7 @@ export default function Home() {
                   description: "Customized treatment plans tailored to your goals"
                 }
               ].map((feature, index) => (
-                <div key={index} className="bg-pink-50 rounded-2xl shadow-lg hover:shadow-xl transition border border-pink-100">
+                <div key={index} className="bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 hover:shadow-2xl hover:border-pink-400 border-2 border-pink-100 transition-all duration-300 transform hover:-translate-y-2 p-6">
                   <div className="flex justify-center mb-4">
                     <div className="p-3 bg-pink-50 rounded-full">
                       {feature.icon}
@@ -458,9 +369,9 @@ export default function Home() {
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Book your free consultation today and take the first step towards achieving your body goals
             </p>
-            <button className="bg-white text-pink-500 px-8 py-3 rounded-full text-lg hover:bg-gray-100 transition inline-flex items-center">
+            <Link to="/booking" className="bg-white text-pink-500 px-8 py-3 rounded-full text-lg hover:bg-gray-100 transition inline-flex items-center">
               Book Now <ArrowRight className="ml-2 w-5 h-5" />
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -638,7 +549,7 @@ export default function Home() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </main>
     </>
   );
 } 
