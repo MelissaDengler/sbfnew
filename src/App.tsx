@@ -36,10 +36,10 @@ const monthlySpecials = [
     location: "Johannesburg",
     originalPrice: "R3,500",
     specialPrice: "R2,800",
-    description: "Complete body transformation package including 3 fat freezing sessions + 2 body wraps",
+    description: "Complete body transformation package including 3 Faradic sessions + 2 body wraps",
     validUntil: "March 31, 2025",
     savings: "20%",
-    features: ["3 Fat Freezing Sessions", "2 Body Wraps", "Free Consultation", "Body Analysis"]
+    features: ["3 Faradic Sessions", "2 Body Wraps", "Free Consultation", "Body Analysis"]
   },
   {
     title: "Ultimate Slim Bundle",
@@ -76,7 +76,7 @@ const testimonials = [
   {
     name: "Emily Thompson",
     rating: 5,
-    comment: "The fat freezing treatment gave me incredible results. I'm so much more confident now!",
+    comment: "The Faradic treatment gave me incredible results. I'm so much more confident now!",
     beforeImage: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&q=80",
     afterImage: "https://images.unsplash.com/photo-1583454155184-870a1f63aebc?auto=format&fit=crop&q=80",
     location: "Cape Town Branch"
@@ -100,7 +100,7 @@ const johannesburgServices = [
     duration: "60 mins"
   },
   {
-    name: "Premium Fat Freezing",
+    name: "Premium Faradic",
     price: "R2,500",
     description: "Advanced cryolipolysis treatment",
     duration: "90 mins"

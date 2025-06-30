@@ -256,7 +256,7 @@ export default function About() {
               <div className="space-y-4">
                 <p className="flex items-center text-gray-600">
                   <MapPin className="w-5 h-5 mr-2 text-pink-500" />
-                  456 Beach Road, Sea Point
+                  Unit 14, 20 Bella Rosa St, Rosenpark, Cape Town, 7550
                 </p>
                 <p className="flex items-center text-gray-600">
                   <Phone className="w-5 h-5 mr-2 text-pink-500" />

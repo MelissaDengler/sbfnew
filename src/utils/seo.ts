@@ -10,7 +10,7 @@ export const siteMetadata = {
   defaultDescription: "Premium body transformation treatments in Johannesburg and Cape Town. Expert slimming solutions with proven results.",
   defaultKeywords: [
     "body sculpting",
-    "fat freezing",
+    "Faradic",
     "slimming clinic",
     "body transformation",
     "skin tightening",
@@ -23,11 +23,11 @@ export const siteMetadata = {
 export const pageMetadata: Record<string, MetaData> = {
   home: {
     title: "Skin & Body Fitness | Premium Body Transformation Treatments",
-    description: "Transform your body with our advanced slimming treatments. Professional body sculpting, fat freezing, and skin tightening in Johannesburg and Cape Town.",
+    description: "Transform your body with our advanced slimming treatments. Professional body sculpting, Faradic, and skin tightening in Johannesburg and Cape Town.",
     keywords: [
       "body transformation",
       "slimming treatments",
-      "fat freezing south africa",
+      "Faradic south africa",
       "body sculpting johannesburg",
       "skin tightening cape town"
     ]
@@ -36,7 +36,7 @@ export const pageMetadata: Record<string, MetaData> = {
     title: "Our Services | Professional Body Sculpting & Slimming Treatments",
     description: "Discover our range of effective body transformation treatments. Expert solutions for fat reduction, skin tightening, and cellulite treatment.",
     keywords: [
-      "fat freezing treatment",
+      "Faradic treatment",
       "body sculpting services",
       "cellulite reduction",
       "skin tightening treatment",
@@ -49,7 +49,7 @@ export const pageMetadata: Record<string, MetaData> = {
     keywords: [
       "slimming clinic johannesburg",
       "body transformation cape town",
-      "professional fat freezing",
+      "professional Faradic",
       "experienced therapists",
       "body sculpting experts"
     ]
@@ -60,7 +60,7 @@ export const pageMetadata: Record<string, MetaData> = {
     keywords: [
       "slimming clinic contact",
       "body transformation consultation",
-      "fat freezing booking",
+      "Faradic booking",
       "johannesburg slimming clinic",
       "cape town body sculpting"
     ]
@@ -70,7 +70,7 @@ export const pageMetadata: Record<string, MetaData> = {
     description: "Schedule your body transformation treatment. Easy online booking for our Johannesburg and Cape Town clinics.",
     keywords: [
       "book slimming treatment",
-      "fat freezing appointment",
+      "Faradic appointment",
       "body sculpting booking",
       "treatment consultation",
       "online booking"

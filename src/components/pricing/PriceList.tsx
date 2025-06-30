@@ -6,10 +6,10 @@ import { images } from '../../utils/imageAssets';
 
 const johannesburgPrices = [
   {
-    category: "Fat Freezing Treatments",
+    category: "Faradic Treatments",
     treatments: [
       {
-        name: "Fat Freezing Small Area",
+        name: "Faradic Small Area",
         price: "R1,500",
         description: "Perfect for small areas like arms or chin",
         duration: "45 mins",
@@ -21,7 +21,7 @@ const johannesburgPrices = [
         ]
       },
       {
-        name: "Fat Freezing Medium Area",
+        name: "Faradic Medium Area",
         price: "R2,500",
         description: "Ideal for love handles or lower abdomen",
         duration: "60 mins",
@@ -33,7 +33,7 @@ const johannesburgPrices = [
         ]
       },
       {
-        name: "Fat Freezing Large Area",
+        name: "Faradic Large Area",
         price: "R3,500",
         description: "Best for abdomen or back",
         duration: "75 mins",
@@ -97,7 +97,7 @@ const johannesburgPrices = [
         description: "Complete body transformation package",
         duration: "Multiple sessions",
         features: [
-          "3 Fat Freezing Sessions",
+          "3 Faradic Sessions",
           "3 Cavitation Sessions",
           "3 RF Sessions",
           "Free Consultation & Assessment"
@@ -628,7 +628,7 @@ const locationInfo = {
       "Sunday: Closed"
     ],
     specialties: [
-      "Fat Freezing",
+      "Faradic",
       "Body Contouring",
       "RF Treatments"
     ]

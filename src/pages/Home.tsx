@@ -11,34 +11,34 @@ import { SEO } from '../components/shared/SEO';
 
 const monthlySpecials = [
   {
-    title: "Summer Body Package",
-    location: "Johannesburg",
-    originalPrice: "R3,500",
-    specialPrice: "R2,800",
-    description: "Complete body transformation package including 3 fat freezing sessions + 2 body wraps",
+    title: "Endermologie Special",
+    location: "Both Branches",
+    originalPrice: "R1,200",
+    specialPrice: "R950",
+    description: "Experience Endermologie (vacuum suction slimming/shaping machine) for targeted slimming and shaping.",
     validUntil: "March 31, 2025",
-    savings: "20%",
-    features: ["3 Fat Freezing Sessions", "2 Body Wraps", "Free Consultation", "Body Analysis"]
+    savings: "21%",
+    features: ["Vacuum Suction Technology", "Body Shaping", "Cellulite Reduction"]
   },
   {
-    title: "Ultimate Slim Bundle",
-    location: "Cape Town",
-    originalPrice: "R4,200",
-    specialPrice: "R3,150",
-    description: "6 laser lipo sessions + 3 ultrasonic cavitation treatments",
+    title: "Sauna Dome/Blanket & Chilli Wrap Combo",
+    location: "Both Branches",
+    originalPrice: "R1,000",
+    specialPrice: "R750",
+    description: "Detox and slim down with our infra-red Sauna Dome/Blanket and Chilli Wraps in Sauna.",
     validUntil: "March 31, 2025",
     savings: "25%",
-    features: ["6 Laser Lipo Sessions", "3 Cavitation Treatments", "Nutritional Guide", "Progress Tracking"]
+    features: ["Infra-red Sauna", "Chilli Wraps", "Detox & Slimming"]
   },
   {
-    title: "First-Time Client Special",
+    title: "EMS/Faradic & Fat Dissolving Injections",
     location: "Both Branches",
     originalPrice: "R1,500",
-    specialPrice: "R999",
-    description: "Trial package including consultation, body analysis, and 2 slimming treatments",
+    specialPrice: "R1,100",
+    description: "Tone and sculpt with EMS or Faradic, plus fat dissolving injections for stubborn areas.",
     validUntil: "March 31, 2025",
-    savings: "33%",
-    features: ["2 Slimming Treatments", "Body Analysis", "Consultation", "Treatment Plan"]
+    savings: "27%",
+    features: ["EMS/Faradic Muscle Stimulation", "Fat Dissolving Injections", "Targeted Fat Loss"]
   }
 ];
 
@@ -122,11 +122,11 @@ export default function Home() {
       <SEO page="home" />
       <div className="relative bg-pink-50/95">
         {/* Hero Section - Enhanced with gradient */}
-        <section className="relative h-screen">
+        <section className="relative h-[60vh]">
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&q=80")',
+              backgroundImage: 'url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80")',
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500/80 to-black/50"></div>
@@ -140,9 +140,9 @@ export default function Home() {
               Experience the ultimate in body transformation with our advanced treatments and expert care
             </p>
             <div className="flex gap-4">
-              <button className="bg-pink-500 text-white px-8 py-3 rounded-full text-lg hover:bg-pink-600 transition">
-                Book Your Consultation
-              </button>
+              <Link to="/booking#booking-section" className="bg-pink-500 text-white px-8 py-3 rounded-full text-lg hover:bg-pink-600 transition">
+                Book Now
+              </Link>
               <button className="bg-white text-pink-500 px-8 py-3 rounded-full text-lg hover:bg-gray-100 transition">
                 View Services
               </button>
@@ -605,7 +605,7 @@ export default function Home() {
                 <div className="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0" />
                 <div>
                   <p className="font-semibold">Sarah just booked</p>
-                  <p className="text-sm text-gray-600">Summer Body Package in Johannesburg</p>
+                  <p className="text-sm text-gray-600">Endermologie Special in Both Branches</p>
                   <p className="text-xs text-gray-500 mt-1">2 minutes ago</p>
                 </div>
                 <button 

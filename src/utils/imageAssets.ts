@@ -25,7 +25,7 @@ export const images = {
       src: '/images/treatments/fat-freezing.jpg',
       width: 800,
       height: 600,
-      alt: 'Fat Freezing Treatment',
+      alt: 'Faradic Treatment',
     } as ImageMetadata,
     injections: {
       src: '/images/treatments/injections.jpg',

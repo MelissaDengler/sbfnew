@@ -33,7 +33,7 @@ interface Service {
 const services: Service[] = [
   {
     id: 'fat-freezing',
-    name: 'Fat Freezing',
+    name: 'Faradic',
     duration: '45 min',
     price: 'R1,500',
     description: 'Non-invasive fat reduction treatment targeting specific areas',

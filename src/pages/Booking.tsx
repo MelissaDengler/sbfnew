@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { BookingCalendar } from '../components/booking/BookingCalendar';
 import { MapPin, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -14,7 +13,7 @@ const locations = [
   {
     id: 'capetown',
     name: 'Cape Town',
-    address: '30 Oxford Street, Durbanville',
+    address: 'Unit 14, 20 Bella Rosa St, Rosenpark, Cape Town, 7550',
     hours: '08:00 - 17:00',
     image: '/images/locations/capetown.jpg'
   }
@@ -22,10 +21,12 @@ const locations = [
 
 export default function Booking() {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const freshaBookingUrl = 'https://www.fresha.com/book-now/skin-and-body-fitness-ct-f9kz9qc5/all-offer?share&pId=1082051';
+  const whatsappUrl = 'https://wa.me/27685995717'; // Sam's WhatsApp with country code
 
   return (
     <div className="bg-pink-50 min-h-screen">
-      <section className="py-16 bg-gradient-to-b from-pink-50 to-pink-100">
+      <section id="booking-section" className="py-16 bg-gradient-to-b from-pink-50 to-pink-100">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center mb-4">Book Your Appointment</h1>
           <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
@@ -80,7 +81,33 @@ export default function Booking() {
                   Change Location
                 </button>
               </div>
-              <BookingCalendar location={selectedLocation} />
+              <div className="max-w-4xl mx-auto flex flex-col items-center">
+                {selectedLocation === 'capetown' ? (
+                  <>
+                    <p className="mb-6 text-lg text-gray-700">Ready to book? Click below to schedule your appointment on Fresha.</p>
+                    <a
+                      href={freshaBookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-8 py-4 bg-pink-500 text-white font-semibold rounded-lg shadow-lg hover:bg-pink-600 transition-colors text-xl"
+                    >
+                      Book on Fresha
+                    </a>
+                  </>
+                ) : selectedLocation === 'johannesburg' ? (
+                  <>
+                    <p className="mb-6 text-lg text-gray-700">To book in Johannesburg, please contact Sam directly via WhatsApp.</p>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-8 py-4 bg-green-500 text-white font-semibold rounded-lg shadow-lg hover:bg-green-600 transition-colors text-xl"
+                    >
+                      Book via WhatsApp with Sam
+                    </a>
+                  </>
+                ) : null}
+              </div>
             </>
           )}
         </div>

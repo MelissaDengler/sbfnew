@@ -22,13 +22,11 @@ interface BookingData {
 }
 
 const services = [
-  "Fat Freezing",
-  "Ultrasound Cavitation",
-  "Radio Frequency",
-  "Wood Therapy",
-  "Body Sculpting Package",
-  "Ultimate Body Package",
-  "Maintenance Package"
+  "Endermologie (vacuum suction slimming/shaping machine)",
+  "Sauna Dome / Sauna blanket (infra-red)",
+  "EMS or Faradic",
+  "Fat Dissolving Injections",
+  "Chilli Wraps in Sauna"
 ];
 
 export default function Contact() {
@@ -177,7 +175,7 @@ export default function Contact() {
                     </p>
                     <p className="flex items-center text-gray-600">
                       <MapPin className="w-5 h-5 text-pink-500 mr-2" />
-                      90 Mountain View Rd, Stellenberg, Cape Town, 7550
+                      Unit 14, 20 Bella Rosa St, Rosenpark, Cape Town, 7550
                     </p>
                   </div>
                 </div>
@@ -222,7 +220,7 @@ export default function Contact() {
               </div>
               <div className="h-[400px] rounded-lg overflow-hidden">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.576184657641!2d18.6161!3d-33.8961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc500f8b0f131d%3A0x7c40b8a70a4a39a9!2s90%20Mountain%20View%20Rd%2C%20Stellenberg%2C%20Cape%20Town%2C%207550!5e0!3m2!1sen!2sza!4v1620000000000!5m2!1sen!2sza"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.576184657641!2d18.6381!3d-33.8707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5d1e2e2e2e2e%3A0x1234567890abcdef!2sUnit%2014%2C%2020%20Bella%20Rosa%20St%2C%20Rosenpark%2C%20Cape%20Town%2C%207550!5e0!3m2!1sen!2sza!4v1710000000000!5m2!1sen!2sza"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
