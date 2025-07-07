@@ -38,21 +38,33 @@ export function RootLayout({ children }: RootLayoutProps) {
       icon: <Sparkles className="w-5 h-5" />,
       dropdownItems: [
         { 
-          name: 'Faradic', 
-          path: '/services#fat-freezing',
+          name: 'Fat Dissolving Injections', 
+          path: '/services#fat-dissolving',
           description: 'Non-invasive fat reduction',
           icon: <Droplet className="w-5 h-5 text-pink-400" />
         },
         { 
-          name: 'Body Sculpting', 
-          path: '/services#body-sculpting',
+          name: 'Endermologie', 
+          path: '/services#endermologie',
           description: 'Advanced body contouring',
           icon: <Zap className="w-5 h-5 text-pink-400" />
         },
         { 
-          name: 'Skin Tightening', 
-          path: '/services#skin-tightening',
+          name: 'Sauna Dome/Sauna Blanket', 
+          path: '/services#sauna',
+          description: 'Detox and relax with infrared heat',
+          icon: <Zap className="w-5 h-5 text-pink-400" />
+        },
+        { 
+          name: 'EMS/Faradic', 
+          path: '/services#ems',
           description: 'Firm and tone your skin',
+          icon: <Star className="w-5 h-5 text-pink-400" />
+        },
+        { 
+          name: 'Beauty Treatments', 
+          path: '/services#beauty-treatments',
+          description: 'Facials, peels, and more',
           icon: <Star className="w-5 h-5 text-pink-400" />
         },
       ]
