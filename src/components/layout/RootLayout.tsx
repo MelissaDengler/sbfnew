@@ -128,8 +128,13 @@ export function RootLayout({ children }: RootLayoutProps) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <Heart className="w-8 h-8 text-pink-500" />
-              <span className="font-bold text-xl">Skin and Body Fitness</span>
+              <img 
+                src="/Images/Skin and Body Fitness Logo.jpg" 
+                alt="Skin and Body Fitness Logo" 
+                className="h-10 w-auto object-contain" 
+                style={{ maxHeight: '40px', maxWidth: '160px' }}
+              />
+              <span className="font-bold text-xl hidden sm:inline">Skin and Body Fitness</span>
             </Link>
 
             {/* Enhanced Desktop Navigation */}

@@ -1,555 +1,351 @@
-import { useState } from 'react';
-import { useCountdown } from '../hooks/useCountdown';
-import { format, addMonths } from 'date-fns';
-import { 
-  Heart, Star, Shield, Award, Clock, CheckCircle, Users, ArrowRight, 
-  Timer, Tag, Sparkles, Share2, X, ArrowLeft, ArrowRight as ArrowRightIcon 
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { SEO } from '../components/shared/SEO';
+import { motion } from 'framer-motion';
+import { Calendar, Star, Users, TrendingUp, ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
+import OptimizedImage from '../components/shared/OptimizedImage';
+import { getImageAsset } from '../utils/imageAssets';
 
-const monthlySpecials = [
-  {
-    title: "Endermologie Special",
-    location: "Both Branches",
-    originalPrice: "R1,200",
-    specialPrice: "R950",
-    description: "Experience Endermologie (vacuum suction slimming/shaping machine) for targeted slimming and shaping.",
-    validUntil: "March 31, 2025",
-    savings: "21%",
-    features: ["Vacuum Suction Technology", "Body Shaping", "Cellulite Reduction"]
-  },
-  {
-    title: "Sauna Dome/Blanket & Chilli Wrap Combo",
-    location: "Both Branches",
-    originalPrice: "R1,000",
-    specialPrice: "R750",
-    description: "Detox and slim down with our infra-red Sauna Dome/Blanket and Chilli Wraps in Sauna.",
-    validUntil: "March 31, 2025",
-    savings: "25%",
-    features: ["Infra-red Sauna", "Chilli Wraps", "Detox & Slimming"]
-  },
-  {
-    title: "EMS/Faradic & Fat Dissolving Injections",
-    location: "Both Branches",
-    originalPrice: "R1,500",
-    specialPrice: "R1,100",
-    description: "Tone and sculpt with EMS or Faradic, plus fat dissolving injections for stubborn areas.",
-    validUntil: "March 31, 2025",
-    savings: "27%",
-    features: ["EMS/Faradic Muscle Stimulation", "Fat Dissolving Injections", "Targeted Fat Loss"]
-  }
-];
+const Home: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const beforeAfterImages = [
+    'male side profile before and after (1).jpg',
+    'male side profile before and after (2).jpg',
+    'female side profile before and after (3).jpg',
+    'male side profile before and after (4).jpg',
+    'male side profile before and after (5).jpg',
+    'female side profile before and after (6).jpg',
+    'male side profile before and after (7).jpg'
+  ];
 
-const specialsWithExtras = monthlySpecials.map(special => ({
-  ...special,
-  endDate: addMonths(new Date(), 1).getTime(), // 1 month from now
-  image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80", // Natural, leafy
-  reviews: [
-    {
-      name: "Sarah M.",
-      rating: 5,
-      comment: "Amazing results! I'm so happy with my transformation.",
-      date: "2 weeks ago"
-    },
-    {
-      name: "Emily R.",
-      rating: 5,
-      comment: "The best investment I've made in myself. Highly recommend!",
-      date: "1 month ago"
-    }
-  ]
-}));
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % beforeAfterImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
-// Add these animation variants near the top of your file
-const modalVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1 }
-};
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % beforeAfterImages.length);
+  };
 
-const overlayVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 }
-};
-
-// Add these color constants at the top
-const theme = {
-  pink: {
-    light: 'bg-pink-50',
-    medium: 'bg-pink-100',
-    accent: 'bg-pink-500',
-    hover: 'hover:bg-pink-600',
-    text: 'text-pink-500',
-    textHover: 'hover:text-pink-600',
-    border: 'border-pink-500',
-    shadow: 'shadow-pink-100'
-  }
-};
-
-export default function Home() {
-  const [selectedSpecial, setSelectedSpecial] = useState<number | null>(null);
-  const [showCompare, setShowCompare] = useState(false);
-  const [showSocialProof, setShowSocialProof] = useState(false);
-
-  const handleShare = async (special: typeof monthlySpecials[0]) => {
-    const shareData = {
-      title: 'Special Offer from Skin & Body Fitness',
-      text: `Check out this amazing deal: ${special.title} - Save ${special.savings}!`,
-      url: window.location.href,
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        // Fallback to copying to clipboard
-        await navigator.clipboard.writeText(
-          `${shareData.title}\n${shareData.text}\n${shareData.url}`
-        );
-        alert('Link copied to clipboard!');
-      }
-    } catch (err) {
-      console.error('Error sharing:', err);
-    }
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + beforeAfterImages.length) % beforeAfterImages.length);
   };
 
   return (
-    <>
-      <SEO 
-        page="home" 
-        customTitle="Home | Skin & Body Fitness - Advanced Slimming & Shaping" 
-        customDescription="Transform your body and life with advanced slimming, shaping, and wellness treatments at Skin & Body Fitness. Explore our monthly specials and book your session today!" 
-      />
-      <main className="relative bg-pink-50/95">
-        {/* Hero Section - Enhanced with gradient */}
-        <section className="relative h-[50vh] sm:h-[60vh]">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80")',
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="relative h-[85vh] bg-gradient-to-br from-slate-900 via-pink-900 to-slate-900 overflow-hidden">
+        {/* Animated Background Orbs */}
+        <div className="absolute inset-0">
+          <motion.div
+            className="absolute top-20 left-20 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
             }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-500/80 to-black/50"></div>
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-rose-500/15 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.4, 0.6, 0.4],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-5xl mx-auto">
+            <motion.h1 
+              className="text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold mb-6 bg-gradient-to-r from-white via-pink-200 to-rose-300 bg-clip-text text-transparent leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Transform Your Body
+            </motion.h1>
+            
+            <motion.p 
+              className="text-xl sm:text-2xl lg:text-3xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Professional slimming treatments and wellness solutions for lasting results
+            </motion.p>
+
+            {/* Statistics */}
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
+                <Users className="w-5 h-5 text-pink-300" />
+                <span className="text-white font-semibold text-lg">5000+ Happy Clients</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
+                <TrendingUp className="w-5 h-5 text-pink-300" />
+                <span className="text-white font-semibold text-lg">98% Success Rate</span>
+              </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <Link to="/booking">
+                <motion.button 
+                  className="group relative px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold rounded-full text-lg shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 overflow-hidden"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Book Consultation
+                    <motion.div
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight className="w-5 h-5" />
+                    </motion.div>
+                  </span>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-pink-400 to-rose-400"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "0%" }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
+              </Link>
+              
+              <Link to="/services">
+                <motion.button 
+                  className="group px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-full text-lg hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View Services
+                </motion.button>
+              </Link>
+            </motion.div>
+
+            {/* Social Proof */}
+            <motion.div 
+              className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="w-10 h-10 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full border-2 border-white/20 flex items-center justify-center text-white font-bold text-sm">
+                      {String.fromCharCode(65 + i)}
+                    </div>
+                  ))}
+                </div>
+                <span className="text-gray-300 ml-2">Join thousands of satisfied clients</span>
+              </div>
+              
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+                <span className="text-gray-300 ml-2">4.9/5 Rating</span>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Preview */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Professional treatments designed to help you achieve your wellness goals
+            </p>
           </div>
           
-          <div className="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-2 sm:px-4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              Transform Your Body,<br />Transform Your Life
-            </h1>
-            <p className="text-base sm:text-xl mb-8 max-w-2xl">
-              Experience the ultimate in body transformation with our advanced treatments and expert care
-            </p>
-            <div className="flex gap-4">
-              <Link to="/booking#booking-section" className="bg-pink-500 text-white px-8 py-3 rounded-full text-lg hover:bg-pink-600 transition">
-                Book Now
-              </Link>
-              <Link to="/services" className="bg-white text-pink-500 px-8 py-3 rounded-full text-lg hover:bg-gray-100 transition">
-                View Services
-              </Link>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Slimming Treatments",
+                description: "Advanced non-invasive procedures for effective weight loss",
+                icon: TrendingUp,
+                color: "from-pink-500 to-rose-500"
+              },
+              {
+                title: "Wellness Programs",
+                description: "Comprehensive health and nutrition guidance",
+                icon: Users,
+                color: "from-purple-500 to-pink-500"
+              },
+              {
+                title: "Personal Consultation",
+                description: "One-on-one sessions tailored to your specific needs",
+                icon: Calendar,
+                color: "from-rose-500 to-pink-500"
+              }
+            ].map((service, index) => (
+              <motion.div 
+                key={index}
+                className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                whileHover={{ y: -5 }}
+              >
+                <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mb-6`}>
+                  <service.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{service.description}</p>
+              </motion.div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Monthly Specials Section */}
-        <section className="py-20 bg-gradient-to-b from-pink-50 to-pink-100">
-          <div className="container mx-auto px-2 sm:px-4">
-            <div className="text-center mb-16">
-              <span className="bg-pink-100 text-pink-500 px-4 py-1 rounded-full font-semibold text-sm">
-                Limited Time Offers
-              </span>
-              <h2 className="text-4xl font-bold mt-4 mb-4">Monthly Specials</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Take advantage of our exclusive monthly deals and start your transformation journey today.
-              </p>
+      {/* Before/After Carousel */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Real Results</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              See the amazing transformations our clients have achieved
+            </p>
+          </div>
+          
+          <div className="relative max-w-4xl mx-auto">
+            <div className="relative overflow-hidden rounded-2xl bg-white shadow-2xl">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {beforeAfterImages.map((image, index) => (
+                  <div key={index} className="w-full flex-shrink-0">
+                    <OptimizedImage
+                      src={getImageAsset(image)}
+                      alt={`Before and after transformation ${index + 1}`}
+                      className="w-full h-96 object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+              
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-              {specialsWithExtras.map((special, index) => (
-                <div 
+            
+            {/* Dot Indicators */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {beforeAfterImages.map((_, index) => (
+                <button
                   key={index}
-                  className="bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-3xl border-2 border-pink-100 shadow-2xl shadow-pink-300/40 hover:shadow-[0_8px_32px_0_rgba(236,72,153,0.25),0_1.5px_8px_0_rgba(236,72,153,0.10)] hover:border-pink-400 hover:ring-2 hover:ring-pink-200/60 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 p-1 overflow-hidden"
-                >
-                  <div className="bg-white rounded-2xl p-6 h-full flex flex-col">
-                    {/* Before/After Images */}
-                    <div className="relative h-48">
-                      <img 
-                        src={special.image} 
-                        alt={`Before and after results for ${special.title}`}
-                        className="absolute inset-0 w-full h-full object-cover rounded-t-2xl"
-                      />
-                    </div>
-
-                    <div className="p-6 bg-gradient-to-b from-pink-50 to-pink-100">
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <h3 className="text-xl font-semibold mb-2">{special.title}</h3>
-                          <p className="text-gray-500 flex items-center text-sm">
-                            <Timer className="w-4 h-4 mr-1" />
-                            Valid until {special.validUntil}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Countdown Timer - Enhanced */}
-                      <div className="mb-4 text-center">
-                        {(() => {
-                          const { days, hours, minutes, seconds } = useCountdown(special.endDate);
-                          return (
-                            <div className="grid grid-cols-4 gap-2">
-                              {[
-                                { value: days, label: 'Days' },
-                                { value: hours, label: 'Hours' },
-                                { value: minutes, label: 'Mins' },
-                                { value: seconds, label: 'Secs' }
-                              ].map((time, idx) => (
-                                <div key={idx} className="bg-pink-100 p-2 rounded-lg shadow-sm">
-                                  <div className="text-xl font-bold text-pink-500">{time.value}</div>
-                                  <div className="text-xs text-pink-400">{time.label}</div>
-                                </div>
-                              ))}
-                            </div>
-                          );
-                        })()}
-                      </div>
-
-                      <div className="mb-4">
-                        <span className="text-gray-400 line-through text-lg">{special.originalPrice}</span>
-                        <span className="text-3xl font-bold text-pink-500 ml-2">{special.specialPrice}</span>
-                      </div>
-
-                      <p className="text-gray-600 mb-4">{special.description}</p>
-
-                      <div className="space-y-2 mb-6">
-                        {special.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center text-gray-600">
-                            <CheckCircle className="w-5 h-5 text-pink-500 mr-2" />
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="flex items-center justify-between text-sm mb-6">
-                        <span className="flex items-center text-gray-500">
-                          <Tag className="w-4 h-4 mr-1" />
-                          {special.location}
-                        </span>
-                        <span className="flex items-center text-pink-500">
-                          <Sparkles className="w-4 h-4 mr-1" />
-                          Limited Spots
-                        </span>
-                      </div>
-
-                      {/* Reviews Preview */}
-                      <div className="mb-6">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold">Client Reviews</h4>
-                          <button 
-                            onClick={() => setSelectedSpecial(index)}
-                            className="text-sm text-pink-500 hover:text-pink-600"
-                          >
-                            View All
-                          </button>
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          {special.reviews[0].comment.substring(0, 70)}...
-                        </div>
-                      </div>
-
-                      {/* Action Buttons - Enhanced */}
-                      <div className="flex gap-2 mb-4">
-                        <button
-                          onClick={() => handleShare(special)}
-                          className="flex-1 flex items-center justify-center px-4 py-2 bg-pink-50 text-pink-500 rounded-full hover:bg-pink-100 transition"
-                        >
-                          <Share2 className="w-4 h-4 mr-2" />
-                          Share
-                        </button>
-                        <button
-                          onClick={() => setShowCompare(true)}
-                          className="flex-1 flex items-center justify-center px-4 py-2 bg-pink-50 text-pink-500 rounded-full hover:bg-pink-100 transition"
-                        >
-                          Compare
-                        </button>
-                      </div>
-
-                      <Link
-                        to="/booking"
-                        className="block w-full bg-pink-500 text-white text-center py-3 rounded-full hover:bg-pink-600 transition"
-                      >
-                        Book Now
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-12">
-              <Link
-                to="/services"
-                className="inline-flex items-center text-pink-500 hover:text-pink-600 font-semibold"
-              >
-                View All Services
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section */}
-        <section className="py-16 bg-pink-50">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="text-center bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 border-2 border-pink-100 py-10 px-2 hover:shadow-2xl hover:border-pink-400 transition-all duration-300">
-                <div className="text-4xl font-bold text-pink-500 mb-2">5000+</div>
-                <div className="text-gray-600">Happy Clients</div>
-              </div>
-              <div className="text-center bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 border-2 border-pink-100 py-10 px-2 hover:shadow-2xl hover:border-pink-400 transition-all duration-300">
-                <div className="text-4xl font-bold text-pink-500 mb-2">15+</div>
-                <div className="text-gray-600">Years Experience</div>
-              </div>
-              <div className="text-center bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 border-2 border-pink-100 py-10 px-2 hover:shadow-2xl hover:border-pink-400 transition-all duration-300">
-                <div className="text-4xl font-bold text-pink-500 mb-2">98%</div>
-                <div className="text-gray-600">Success Rate</div>
-              </div>
-              <div className="text-center bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 border-2 border-pink-100 py-10 px-2 hover:shadow-2xl hover:border-pink-400 transition-all duration-300">
-                <div className="text-4xl font-bold text-pink-500 mb-2">20+</div>
-                <div className="text-gray-600">Expert Staff</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Choose Us - Enhanced */}
-        <section className="py-20 bg-gradient-to-b from-pink-50 to-pink-100">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-16">Why Choose Us</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  icon: <Shield className="w-12 h-12 text-pink-500" />,
-                  title: "Safe & Certified",
-                  description: "All treatments are FDA approved and performed by certified professionals"
-                },
-                {
-                  icon: <Award className="w-12 h-12 text-pink-500" />,
-                  title: "Expert Team",
-                  description: "Highly trained specialists with years of experience"
-                },
-                {
-                  icon: <Clock className="w-12 h-12 text-pink-500" />,
-                  title: "Quick Results",
-                  description: "See visible improvements in just a few sessions"
-                },
-                {
-                  icon: <Users className="w-12 h-12 text-pink-500" />,
-                  title: "Personalized Care",
-                  description: "Customized treatment plans tailored to your goals"
-                }
-              ].map((feature, index) => (
-                <div key={index} className="bg-gradient-to-br from-pink-50 via-white to-pink-100 rounded-2xl shadow-xl shadow-pink-200/50 hover:shadow-2xl hover:border-pink-400 border-2 border-pink-100 transition-all duration-300 transform hover:-translate-y-2 p-6">
-                  <div className="flex justify-center mb-4">
-                    <div className="p-3 bg-pink-50 rounded-full">
-                      {feature.icon}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    index === currentSlide 
+                      ? 'bg-pink-500 scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA Section - Enhanced */}
-        <section className="py-20 bg-gradient-to-r from-pink-500 to-pink-600 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold mb-6">Ready to Start Your Transformation?</h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Book your free consultation today and take the first step towards achieving your body goals
+      {/* Contact Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Get Started Today</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Ready to begin your transformation journey? Contact us for a consultation
             </p>
-            <Link to="/booking" className="bg-white text-pink-500 px-8 py-3 rounded-full text-lg hover:bg-gray-100 transition inline-flex items-center">
-              Book Now <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
           </div>
-        </section>
-
-        {/* Reviews Modal */}
-        <AnimatePresence>
-          {selectedSpecial !== null && (
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div 
-              className="fixed inset-0 bg-pink-500/20 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-              variants={overlayVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              onClick={() => setSelectedSpecial(null)}
+              className="text-center p-8 bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl"
+              whileHover={{ scale: 1.05 }}
             >
-              <motion.div 
-                className="bg-pink-50/95 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 border border-pink-100"
-                variants={modalVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                onClick={e => e.stopPropagation()}
-              >
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl md:text-2xl font-bold">Client Reviews</h3>
-                  <button 
-                    onClick={() => setSelectedSpecial(null)}
-                    className="text-gray-500 hover:text-gray-700 p-2"
-                  >
-                    <X className="w-6 h-6" />
-                  </button>
-                </div>
-                <div className="space-y-4">
-                  {specialsWithExtras[selectedSpecial].reviews.map((review, idx) => (
-                    <motion.div 
-                      key={idx} 
-                      className="border-b pb-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="font-semibold">{review.name}</div>
-                        <div className="text-sm text-gray-500">{review.date}</div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                        ))}
-                      </div>
-                      <p className="text-gray-600">{review.comment}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Compare Modal */}
-        <AnimatePresence>
-          {showCompare && (
-            <motion.div 
-              className="fixed inset-0 bg-pink-500/20 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-              variants={overlayVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              onClick={() => setShowCompare(false)}
-            >
-              <motion.div 
-                className="bg-pink-50/95 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-4 md:p-6"
-                variants={modalVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                onClick={e => e.stopPropagation()}
-              >
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl md:text-2xl font-bold">Compare Packages</h3>
-                  <button 
-                    onClick={() => setShowCompare(false)}
-                    className="text-gray-500 hover:text-gray-700 p-2"
-                  >
-                    <X className="w-6 h-6" />
-                  </button>
-                </div>
-                
-                {/* Enhanced Comparison Table */}
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr>
-                        <th className="text-left p-4 border-b">Features</th>
-                        {specialsWithExtras.map((special, idx) => (
-                          <th key={idx} className="p-4 border-b">
-                            <div className="text-center">
-                              <h4 className="font-semibold">{special.title}</h4>
-                              <div className="text-2xl font-bold text-pink-500">{special.specialPrice}</div>
-                              <div className="text-sm text-gray-500 line-through">{special.originalPrice}</div>
-                            </div>
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {/* Features Comparison */}
-                      {['Duration', 'Sessions', 'Consultation', 'Follow-up'].map((feature, idx) => (
-                        <tr key={idx} className="border-b">
-                          <td className="p-4 font-medium">{feature}</td>
-                          {specialsWithExtras.map((special, specialIdx) => (
-                            <td key={specialIdx} className="p-4 text-center">
-                              <CheckCircle className="w-5 h-5 text-pink-500 mx-auto" />
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                      {/* Additional Features */}
-                      <tr className="border-b bg-pink-50">
-                        <td className="p-4 font-medium">Savings</td>
-                        {specialsWithExtras.map((special, idx) => (
-                          <td key={idx} className="p-4 text-center font-semibold text-pink-500">
-                            {special.savings}
-                          </td>
-                        ))}
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* Quick Action Buttons */}
-                <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                  {specialsWithExtras.map((special, idx) => (
-                    <motion.div
-                      key={idx}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Link
-                        to="/booking"
-                        className="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition"
-                      >
-                        Book {special.title}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Social Proof Toast */}
-        <AnimatePresence>
-          {showSocialProof && (
-            <motion.div
-              initial={{ x: '100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '100%', opacity: 0 }}
-              className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0" />
-                <div>
-                  <p className="font-semibold">Sarah just booked</p>
-                  <p className="text-sm text-gray-600">Endermologie Special in Both Branches</p>
-                  <p className="text-xs text-gray-500 mt-1">2 minutes ago</p>
-                </div>
-                <button 
-                  onClick={() => setShowSocialProof(false)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Phone className="w-8 h-8 text-white" />
               </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Call Us</h3>
+              <p className="text-gray-600">+27 11 123 4567</p>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
-    </>
+            
+            <motion.div 
+              className="text-center p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Email Us</h3>
+              <p className="text-gray-600">info@skinbodyfitness.co.za</p>
+            </motion.div>
+            
+            <motion.div 
+              className="text-center p-8 bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-rose-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <MapPin className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Visit Us</h3>
+              <p className="text-gray-600">Johannesburg, South Africa</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
-} 
+};
+
+export default Home; 
