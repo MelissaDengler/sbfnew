@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Star, Users, TrendingUp, ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
-import OptimizedImage from '../components/shared/OptimizedImage';
-import { getImageAsset } from '../utils/imageAssets';
+import { OptimizedImage } from '../components/shared/OptimizedImage';
 
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -14,7 +13,7 @@ const Home: React.FC = () => {
     'female side profile before and after (3).jpg',
     'male side profile before and after (4).jpg',
     'male side profile before and after (5).jpg',
-    'female side profile before and after (6).jpg',
+    'femmale side profile before and after (6).jpg',
     'male side profile before and after (7).jpg'
   ];
 
@@ -251,10 +250,15 @@ const Home: React.FC = () => {
               >
                 {beforeAfterImages.map((image, index) => (
                   <div key={index} className="w-full flex-shrink-0">
-                    <OptimizedImage
-                      src={getImageAsset(image)}
+                    <img
+                      src={`/Images/${image}`}
                       alt={`Before and after transformation ${index + 1}`}
                       className="w-full h-96 object-cover"
+                      onError={(e) => {
+                        console.error('Image failed to load:', `/Images/${image}`);
+                        e.currentTarget.style.border = '2px solid red';
+                      }}
+                      onLoad={() => console.log('Image loaded successfully:', `/Images/${image}`)}
                     />
                   </div>
                 ))}
